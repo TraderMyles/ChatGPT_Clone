@@ -55,39 +55,44 @@ Follow these steps to run the chatbot locally.
 ```bash
 git clone <REPO_URL>
 cd <REPO_NAME>
+```
 
-2️⃣ Create and activate a virtual environment
+### 2️⃣ Create and activate a virtual environment
 
-Windows
-
+#### Windows
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
-
-Mac / Linux
-
+#### Mac / Linux
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-3️⃣ Install dependencies
-
+### 3️⃣ Install dependencies
+```bash
 pip install openai python-dotenv ddgs
+```
 
-4️⃣ Create a .env file
+### 4️⃣ Create a .env file
 
 In the project root, create a file called .env and add:
-
+```bash
 OPENAI_API_KEY=your_openai_api_key_here
-
+```
 You can get an API key from https://platform.openai.com/account/api-keys
 
-5️⃣ Run the chatbot
+### 5️⃣ Run the chatbot
+```bash
 python chatbot_sqlite.py
+```
 
 That’s it.
 The chatbot will start in your terminal and automatically create a local SQLite database for memory.
 
-💬 Commands (Type these in the chatbot)
+### 💬 Commands (Type these in the chatbot)
 
 | Command                 | What it does              |
 |-------------------------|---------------------------|
@@ -99,7 +104,7 @@ The chatbot will start in your terminal and automatically create a local SQLite 
 | `/help`                 | Show all commands         |
 | `quit` / `exit` / `bye` | Exit the chatbot          |
 
-🧠 Notes
+### 🧠 Notes
 
 Chats are stored locally in chat_memory.db
 

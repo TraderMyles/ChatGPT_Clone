@@ -33,14 +33,10 @@ This project is designed to be **transparent, hackable, and educational** — no
 
 ## 🗂 Project Structure
 
-.
 ├── chatbot_sqlite.py # Main chatbot script
 ├── chat_memory.db # SQLite database (auto-created)
 ├── .env # API key (not committed)
 └── README.md
-
-yaml
-Copy code
 
 ---
 
@@ -49,139 +45,64 @@ Copy code
 - Python **3.10+**
 - An OpenAI API key
 
-### Python packages
-```bash
-pip install openai python-dotenv ddgs
-🔑 Setup
-1️⃣ Create a .env file
-In the project root:
+## 🚀 Quick Start (Basic Instructions)
 
-env
-Copy code
-OPENAI_API_KEY=your_api_key_here
-⚠️ Do not commit this file.
-
-2️⃣ Run the chatbot
-bash
-Copy code
-python chatbot_sqlite.py
-On first run, the app will:
-
-Create chat_memory.db
-
-Start a new chat session
-
-Store the system prompt automatically
-
-💬 How to Use
-Normal chat
-Just type and press Enter:
-
-makefile
-Copy code
-You: explain embeddings simply
-Chatbot: Embeddings are numerical representations of meaning...
-The chatbot remembers the conversation automatically.
-
-🧭 Commands
-Command	Description
-/new or /reset	Start a new chat
-/chats	List recent chats
-/load <chat_id>	Load an existing chat
-/history	Print current chat history
-/delete <chat_id>	Delete a chat
-/help	Show help
-quit / exit / bye	Exit program
-
-Example
-jboss-cli
-Copy code
-/chats
-/load 3c7a4c2b-...
-/history
-🧠 How Memory Works
-Every message is stored in SQLite
-
-On each turn, the bot:
-
-Loads the system prompt
-
-Loads the last N messages (configurable)
-
-Responds using that context
-
-Older messages stay in the database but are not always sent to the model
-
-This keeps responses relevant without token explosion.
-
-🔍 Web Search
-The bot can call a web search tool automatically when:
-
-Information may be time-sensitive
-
-Verification is needed
-
-Search results are:
-
-Retrieved via DuckDuckGo
-
-Passed back to the model
-
-Stored in the database for traceability
-
-⚙️ Configuration
-Inside chatbot_sqlite.py:
-
-python
-Copy code
-MODEL = "gpt-4o-mini"
-CONTEXT_MESSAGES = 24
-Increase CONTEXT_MESSAGES for more memory
-
-Lower it to reduce cost
-
-🧪 Development Notes
-SQLite uses WAL mode for reliability
-
-Chat ordering is based on an autoincrement primary key (not timestamps)
-
-Tool outputs are stored alongside messages
-
-🚀 Possible Extensions
-Add embeddings for long-term semantic memory
-
-Summarize old conversations automatically
-
-Add a GUI or web interface
-
-Add user profiles
-
-Add export/import for chats
-
-🛠 Troubleshooting
-Chats not showing correctly?
-Delete the database and restart:
-
-bash
-Copy code
-del chat_memory.db   # Windows
-rm chat_memory.db    # Mac/Linux
-API key not found?
-Make sure .env exists and is loaded.
-
-📜 License
-Use, modify, and build on this freely.
-This project is meant for learning and experimentation.
-
-yaml
-Copy code
+Follow these steps to run the chatbot locally.
 
 ---
 
-If you want, next I can:
-- Add a **“How memory works visually”** section
-- Write a **developer-focused README**
-- Create a **second README** for non-technical users
-- Add screenshots / architecture diagrams
+### 1️⃣ Clone the repository
+```bash
+git clone <REPO_URL>
+cd <REPO_NAME>
 
-Just say the word.
+2️⃣ Create and activate a virtual environment
+
+Windows
+
+python -m venv venv
+venv\Scripts\activate
+
+
+Mac / Linux
+
+python3 -m venv venv
+source venv/bin/activate
+
+3️⃣ Install dependencies
+
+pip install openai python-dotenv ddgs
+
+4️⃣ Create a .env file
+
+In the project root, create a file called .env and add:
+
+OPENAI_API_KEY=your_openai_api_key_here
+
+You can get an API key from https://platform.openai.com/account/api-keys
+
+5️⃣ Run the chatbot
+python chatbot_sqlite.py
+
+That’s it.
+The chatbot will start in your terminal and automatically create a local SQLite database for memory.
+
+💬 Commands (Type these in the chatbot)
+
+| Command                 | What it does              |
+|-------------------------|---------------------------|
+| `/new` or `/reset`      | Start a new chat          |
+| `/chats`                | List saved chats          |
+| `/load <chat_id>`       | Load a previous chat      |
+| `/history`              | Show current chat history |
+| `/delete <chat_id>`     | Delete a chat             |
+| `/help`                 | Show all commands         |
+| `quit` / `exit` / `bye` | Exit the chatbot          |
+
+🧠 Notes
+
+Chats are stored locally in chat_memory.db
+
+Memory persists between sessions
+
+Only recent messages are sent to the model to control cost
